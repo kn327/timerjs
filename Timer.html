@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="Timer.js"></script>
+</head>
+<body>
+    <p>Open Dev Tools in your browser to see the output</p>
+    <script type="text/javascript">
+        var i = 0;
+        var t = new Timer();
+
+        // interval is expressed in milliseconds
+        t.interval = 1000; // 1 sec
+        // indicates that the timer should reset and run again after raising the elapsed event
+        t.autoReset = true;
+        // event that is raised when the interval is elapsed
+        t.elapsed = function () {
+            console.log(++i);
+
+            if (i == 10) // after ten runs, terminate
+                t.stop();
+        };
+        // starts the timer
+        t.start();
+
+        // after 2 seconds, stop the timer.
+        window.setTimeout(function () {
+            console.log("Stopping timer");
+            t.stop();
+            i = 0;
+
+            // after 1 second, start the timer again.
+            window.setTimeout(function () {
+                console.log("Restarting timer");
+                t.start();
+            }, 1000);
+        }, 3000);
+
+    </script>
+</body>
+</html>
